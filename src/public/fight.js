@@ -4,11 +4,11 @@ import ImprovedFighter from "./improvedFighter";
 
 export default async function fight(fighter, improvedFighter, ...point){
 
-    let count = point.length;
+    let rand = point.length;
     let isFight = true;    
      while(isFight){
-        if(count <= 0)count = point.length;
-        count        
+        if(rand <= 0)rand = Math.floor(Math.random() * point.length);
+        rand        
         if(fighter.health <= 0){
             await fighter.knockout()
                 .then(()=> {isFight = false;})
@@ -20,7 +20,7 @@ export default async function fight(fighter, improvedFighter, ...point){
                 .then(()=> {isFight = false;})
                 .catch(error=>{});
         }
-        let ptn = point[count];
+        let ptn = point[rand];
         fighter.hit(improvedFighter, ptn);
         improvedFighter.doubleHit(fighter, ptn);
 
